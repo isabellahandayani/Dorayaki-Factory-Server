@@ -1,24 +1,57 @@
-var exports = module.exports = {};
-const Sequelize = require('sequelize');
-const models = require('../../db/models');
-const Op = Sequelize.Op
+var exports = (module.exports = {});
+const BahanService = require("../services/bahan.service");
 
-exports.index = (req, res) => {
-    /*
-        Read Dorayaki List and its stock
-    */
+exports.index = async (_, res) => {
+  /*
+   *   Return ingredient list
+   */
 
-    models.BahanBaku.findAll({
-    }).then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message
-        })
-    });
-}
+  try {
+    var bahan = await BahanService.getAllBahan();
+    return res.status(200).json({ status: 200, data: bahan });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
 
+exports.detail = async (req, res) => {
+  /*
+   *  Get detail of an ingredient
+   */
+  try {
+    var bahan = await BahanService.getBahan(req.params.id);
+    return res.status(200).json({ status: 200, data: bahan });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
 
-exports.notFound = (req, res) => {
-    console.log("notFound")
-}
+exports.create = async (req, res) => {
+  /*
+   *  Create ingredient
+   */
+
+  try {
+    await BahanService.makeBahan(req);
+    res.status(201).end();
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
+
+exports.update = async (req, res) => {
+  /*
+   *  Update Ingredient Attributes
+   */
+
+  try {
+    await BahanService.updateBahan(req);
+    return res.status(200).end();
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
+
+exports.notFound = (_, res) => {
+  res.status(404).end();
+};
