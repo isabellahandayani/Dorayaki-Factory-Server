@@ -33,7 +33,7 @@ exports.create = async (req, res) => {
 
   try {
     await BahanService.makeBahan(req);
-    res.status(201).end();
+    return res.status(201).end();
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
