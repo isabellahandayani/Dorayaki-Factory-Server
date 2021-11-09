@@ -36,14 +36,14 @@ module.exports = (sequelize, DataTypes) => {
   DorayakiRecipe.belongsTo(
     sequelize.models.Dorayaki, 
     {
-      foreignKey: 'id_dorayaki', 
+      foreignKey: 'id', 
       through: 'id_dorayaki'
     });
 
   DorayakiRecipe.belongsTo(
     sequelize.models.BahanBaku, 
     {
-      foreignKey: 'id_bahan', 
+      foreignKey: 'id', 
       through: 'id_bahan'
     });
     
