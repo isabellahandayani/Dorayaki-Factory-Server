@@ -5,10 +5,11 @@ const process = require("process");
 
 const app = express();
 
-const bahan = require("./api/routes/bahan.route");
-const recipe = require("./api/routes/dorayaki_recipe.route");
+const user = require('./api/routes/UserRoutes');
+const bahan = require("./api/routes/BahanRoutes");
+const dorayaki = require("./api/routes/DorayakiRoutes");
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
@@ -25,7 +26,8 @@ app.get("/", (_, res) => {
 });
 
 app.use("/bahan", bahan);
-app.use("/recipe", recipe);
+app.use("/dorayaki", dorayaki);
+app.use(user);
 
 // Catch error 404
 app.use((_, res, next) => {

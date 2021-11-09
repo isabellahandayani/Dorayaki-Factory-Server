@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bahanController = require("../controllers/bahan.controller");
+const bahanController = require("../controllers/BahanController");
 
 router.get("/", bahanController.index);
 router.get("/:id", bahanController.detail);

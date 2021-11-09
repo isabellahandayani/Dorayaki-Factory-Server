@@ -1,5 +1,5 @@
 var exports = (module.exports = {});
-const BahanService = require("../services/bahan.service");
+const BahanService = require("../services/BahanServices");
 
 exports.index = async (_, res) => {
   /*
