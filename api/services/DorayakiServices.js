@@ -31,7 +31,8 @@ exports.getRecipe = async (id_dorayaki) => {
     "SELECT nama_bahan, satuan, qty FROM \
     (`dorayakis` INNER JOIN `dorayaki_recipe` ON `dorayakis`.`id` = `dorayaki_recipe`.`id_dorayaki`) \
     INNER JOIN bahan_baku ON `dorayaki_recipe`.`id_bahan` = `bahan_baku`.`id`\
-    WHERE id_dorayaki="+id_dorayaki,
+    WHERE id_dorayaki=" +
+      id_dorayaki,
     { type: QueryTypes.SELECT }
   );
   return users;
@@ -41,15 +42,9 @@ exports.makeRecipe = async (req) => {
   /*
    *  Insert new Recipe to DB
    */
-  const dorayaki = await Dorayaki.findOne({
-    order: [["id", "DESC"]],
-  }).then((data) => {
-    return data;
-  });
-
   const recipe = await DorayakiRecipe.create({
     id_bahan: req.body.id_bahan,
-    id_dorayaki: dorayaki.id,
+    id_dorayaki: req.body.id_dorayaki,
     qty: req.body.qty,
   });
   return recipe;

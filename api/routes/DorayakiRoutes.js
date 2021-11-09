@@ -4,7 +4,8 @@ const dorayakiController = require("../controllers/DorayakiController");
 
 router.get("/", dorayakiController.index);
 router.get("/:id", dorayakiController.detail);
-router.post("/resep/create", dorayakiController.create);
+router.post("/create", dorayakiController.createDorayaki);
+router.post("/resep/create", dorayakiController.createRecipe);
 router.get("*", dorayakiController.notFound);
 
 module.exports = router;

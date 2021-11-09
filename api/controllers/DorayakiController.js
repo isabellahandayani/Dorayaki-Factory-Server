@@ -26,14 +26,25 @@ exports.detail = async (req, res) => {
   }
 };
 
-exports.create = async (req, res) => {
+exports.createDorayaki = async (req, res) => {
+  /*
+   *  Create Dorayaki
+   */
+  try {
+    await DorayakiService.makeDorayaki(req);
+    return res.status(201).json({ status: 200, message: "Success" });
+  } catch (e) {
+    return res.status(400).json({ status: 400, message: e.message });
+  }
+};
+
+exports.createRecipe = async (req, res) => {
   /*
    *  Create recipe
    */
   try {
-    await DorayakiService.makeDorayaki(req);
     await DorayakiService.makeRecipe(req);
-    return res.status(201).json({ status: 200, message: "Success"});
+    return res.status(201).json({ status: 200, message: "Success" });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
