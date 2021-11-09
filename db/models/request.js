@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize.models.Dorayaki, 
     {
       foreignKey: 'fk_request_dorayaki',
-      targetKey: 'id_dorayaki',
+      targetKey: 'id',
       through: 'id_dorayaki',
     }
   );
