@@ -5,6 +5,8 @@ const process = require('process');
 
 const app = express();
 
+const user = require('./api/routes/UserRoutes');
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -17,6 +19,8 @@ app.use((req, res, next) => {
 app.get('/', (_, res) => {
   res.send('<h1>Hello World!</h1>');
 });
+
+app.use(user);
 
 // Catch error 404
 app.use((_, res, next) => {
