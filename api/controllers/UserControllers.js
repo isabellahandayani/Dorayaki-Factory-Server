@@ -3,6 +3,11 @@ const jwt = require('jsonwebtoken');
 const UserServices = require('../services/UserServices');
 
 module.exports = {
+  /**
+   * 
+   * @param {Request} req 
+   * @param {Response} res 
+   */
   async createUser(req, res) {
     const { username, email, password } = req.body;
 
@@ -18,7 +23,7 @@ module.exports = {
       true
     );
 
-    if (!created) {
+    if (created) {
       const token = jwt.sign(
         {
           user: admin,
@@ -36,6 +41,11 @@ module.exports = {
       });
     }
   },
+  /**
+   * 
+   * @param {Request} req 
+   * @param {Response} res 
+   */
   async findUser(req, res) {
     const { email, password } = req.body;
 
