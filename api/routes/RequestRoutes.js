@@ -7,6 +7,6 @@ router.get("/", Authenticator, requestController.index);
 router.get("/log", Authenticator, requestController.logRequest);
 router.post("/:id/validate", Authenticator, requestController.validateRequest);
 router.post("/create", requestController.createRequest);
-
+router.get("*", requestController.notFound);
 
 module.exports = router;

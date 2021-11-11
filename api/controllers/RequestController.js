@@ -75,3 +75,7 @@ exports.createRequest = async (req, res) => {
     return res.status(400).json({ message: e.message });
   }
 };
+
+exports.notFound = (_, res) => {
+  res.status(404).end();
+};
