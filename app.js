@@ -9,6 +9,7 @@ const user = require('./api/routes/UserRoutes');
 const bahan = require("./api/routes/BahanRoutes");
 const dorayaki = require("./api/routes/DorayakiRoutes");
 
+// SETUP
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +26,7 @@ app.get("/", (_, res) => {
   res.send("<h1>Hello World!</h1>");
 });
 
+// API Routes
 app.use("/bahan", bahan);
 app.use("/dorayaki", dorayaki);
 app.use(user);

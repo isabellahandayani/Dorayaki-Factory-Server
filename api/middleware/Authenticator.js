@@ -1,9 +1,15 @@
-import {JWT_SECRET} from '../../utils/Constant';
-
 const jwt = require('jsonwebtoken');
+JWT_SECRET = require('../../utils/Constant');
 
+/**
+ * 
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {Function} next 
+ * @returns 
+ */
 const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization.include('Bearer') && req.headers.authorization.split(' ')[1];
+    const token = req.headers.authorization && req.headers.authorization.includes('Bearer') && req.headers.authorization.split(' ')[1];
     if (!token) {
         return res.status(401).json({
             message: 'No token provided.'
