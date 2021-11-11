@@ -8,6 +8,7 @@ const app = express();
 const user = require('./api/routes/UserRoutes');
 const bahan = require("./api/routes/BahanRoutes");
 const dorayaki = require("./api/routes/DorayakiRoutes");
+const request = require("./api/routes/RequestRoutes");
 
 // SETUP
 app.use(logger('dev'));
@@ -29,6 +30,7 @@ app.get("/", (_, res) => {
 // API Routes
 app.use("/bahan", bahan);
 app.use("/dorayaki", dorayaki);
+app.use("/request", request)
 app.use(user);
 
 // Catch error 404
