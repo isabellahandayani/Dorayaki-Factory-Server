@@ -39,4 +39,11 @@ module.exports = {
     });
     return res;
   },
+  /**
+   * @return {Admin[]} res 
+   */
+   async findAllAdmins() {
+    const res = await Admin.findAll();
+    return res;
+  },
 };
