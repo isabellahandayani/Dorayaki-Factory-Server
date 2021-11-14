@@ -3,6 +3,7 @@ var exports = (module.exports = {});
 const RequestServices = require("../services/RequestServices");
 const UserServices = require("../services/UserServices");
 const { gmailTransporter, gmailSender } = require('../../config/config')[env];
+const logger = require('winston');
 
 exports.index = async (_, res) => {
   /*
@@ -72,7 +73,7 @@ exports.createRequest = async (req, res) => {
 
   try {
     await RequestServices.makeRequest(req.body);
-    const admins = UserServices.findAllAdmins();
+    const admins = await UserServices.findAllAdmins();
     const { id_dorayaki, stok_added } = req.body;
 
     for (const admin of admins) {
