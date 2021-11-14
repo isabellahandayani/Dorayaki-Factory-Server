@@ -1,5 +1,7 @@
 const exports = (module.exports = {});
 const RequestServices = require("../services/RequestServices");
+const UserServices = require("../services/UserServices");
+const { gmailTransporter, gmailSender } = require('../../config/config')[env];
 
 exports.index = async (_, res) => {
   /*
@@ -69,6 +71,26 @@ exports.createRequest = async (req, res) => {
 
   try {
     await RequestServices.makeRequest(req.body);
+    const admins = UserServices.findAllAdmins();
+    const { id_dorayaki, stok_added } = req.body;
+
+    for (const admin of admins) {
+      const mailOptions = {
+        from: gmailSender,
+        to: admin.email,
+        subject: 'You have a new Dorayaki Stock Request!',
+        text: `Someone need to add ${stok_added} of Dorayaki with ID of ${id_dorayaki}!`
+      }
+
+      gmailTransporter.sendMail(mailOptions, (err, info) => {
+        if (err) {
+          logger.log('error', `Failed sending e-mail to ${admin.email}`)
+          throw err
+        } else {
+          logger.log('info', `Successfully sent e-mail to ${admin.email}: ${info.response}`)
+        }
+      })
+    }
 
     return res.status(200).json({ message: "Success" });
   } catch (e) {
