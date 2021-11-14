@@ -1,11 +1,7 @@
 var exports = (module.exports = {});
-var { QueryTypes } = require("sequelize");
 const {
   Request,
   LogRequest,
-  DorayakiRecipe,
-  BahanBaku,
-  sequelize,
 } = require("../../db/models");
 
 exports.getAllRequest = async () => {
