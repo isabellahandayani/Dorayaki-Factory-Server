@@ -1,4 +1,5 @@
-const exports = (module.exports = {});
+const env = process.env.NODE_ENV || 'development';
+var exports = (module.exports = {});
 const RequestServices = require("../services/RequestServices");
 const UserServices = require("../services/UserServices");
 const { gmailTransporter, gmailSender } = require('../../config/config')[env];
