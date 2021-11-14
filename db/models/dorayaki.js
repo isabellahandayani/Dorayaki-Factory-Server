@@ -17,18 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     dorayaki_name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    desc: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    photo: {
-      type: DataTypes.STRING,
-      allowNull: true
     }
   }, {
     sequelize,

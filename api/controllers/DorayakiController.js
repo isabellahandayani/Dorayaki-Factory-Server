@@ -7,9 +7,9 @@ exports.index = async (_, res) => {
    */
   try {
     var dorayaki = await DorayakiService.getAllDorayaki();
-    return res.status(200).json({ status: 200, data: dorayaki });
+    return res.status(200).json({data: dorayaki });
   } catch (e) {
-    return res.status(400).json({ status: 400, message: e.message });
+    return res.status(400).json({ message: e.message });
   }
 };
 
@@ -20,9 +20,9 @@ exports.detail = async (req, res) => {
   try {
     var recipe = await DorayakiService.getRecipe(req.params.id);
 
-    return res.status(200).json({ status: 200, data: recipe });
+    return res.status(200).json({data: recipe });
   } catch (e) {
-    return res.status(400).json({ status: 400, message: e.message });
+    return res.status(400).json({ message: e.message });
   }
 };
 
@@ -32,9 +32,9 @@ exports.createDorayaki = async (req, res) => {
    */
   try {
     await DorayakiService.makeDorayaki(req);
-    return res.status(201).json({ status: 200, message: "Success" });
+    return res.status(201).json({  message: "Success" });
   } catch (e) {
-    return res.status(400).json({ status: 400, message: e.message });
+    return res.status(400).json({  message: e.message });
   }
 };
 
@@ -44,9 +44,9 @@ exports.createRecipe = async (req, res) => {
    */
   try {
     await DorayakiService.makeRecipe(req);
-    return res.status(201).json({ status: 200, message: "Success" });
+    return res.status(201).json({  message: "Success" });
   } catch (e) {
-    return res.status(400).json({ status: 400, message: e.message });
+    return res.status(400).json({  message: e.message });
   }
 };
 
