@@ -28,7 +28,7 @@ exports.getRecipe = async (id_dorayaki) => {
    */
 
   const users = await sequelize.query(
-    "SELECT nama_bahan, satuan, qty FROM \
+    "SELECT dorayaki_name, nama_bahan, satuan, qty FROM \
     (`dorayakis` INNER JOIN `dorayaki_recipe` ON `dorayakis`.`id` = `dorayaki_recipe`.`id_dorayaki`) \
     INNER JOIN bahan_baku ON `dorayaki_recipe`.`id_bahan` = `bahan_baku`.`id`\
     WHERE id_dorayaki=" +
@@ -57,9 +57,6 @@ exports.makeDorayaki = async (req) => {
 
   const dorayaki = await Dorayaki.create({
     dorayaki_name: req.body.dorayaki_name,
-    price: req.body.price,
-    desc: req.body.desc,
-    photo: req.body.photo,
   });
 
   return dorayaki;
