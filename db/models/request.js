@@ -38,14 +38,5 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'requests',
   });
 
-  Request.belongsTo(
-    sequelize.models.Dorayaki, 
-    {
-      foreignKey: 'fk_request_dorayaki',
-      targetKey: 'id',
-      through: 'id_dorayaki',
-    }
-  );
-
   return Request;
 };
