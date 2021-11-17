@@ -1,7 +1,7 @@
 var exports = (module.exports = {});
 const {
   Request,
-  LogRequest,
+  LogAdminRequest,
 } = require("../../db/models");
 
 exports.getAllRequest = async () => {
@@ -21,7 +21,7 @@ exports.getAllLogRequest = async (id) => {
    *  Read Request List from DB
    */
   try {
-    const data = await LogRequest.findAll({
+    const data = await LogAdminRequest.findAll({
       where: { id_admin: id },
     });
     return data;
@@ -51,13 +51,13 @@ exports.makeRequest = async (data) => {
 
 exports.makeLogRequest = async (data) => {
   /*
-   *  When an admin accept a request, it will create new LogRequest
+   *  When an admin accept a request, it will create new LogAdminRequest
    */
 
   const { id_admin, id_request } = data;
 
   try {
-    const request = await LogRequest.create({
+    const request = await LogAdminRequest.create({
       id_admin: id_admin,
       id_request: id_request,
     });
