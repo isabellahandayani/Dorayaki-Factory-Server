@@ -2,6 +2,12 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('requests', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+      },
       id_dorayaki: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -12,9 +18,9 @@ module.exports = {
         defaultValue: 0,
       },
       status: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.ENUM("accepted", "rejected", "not validated"),
         allowNull: false,
-        defaultValue: 0,
+        defaultValue: "not validated",
       },
       createdAt: {
         allowNull: false,
