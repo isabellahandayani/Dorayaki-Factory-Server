@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
     },
     status: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.ENUM("accepted", "rejected", "not validated"),
       allowNull: false,
-      defaultValue: 0,
+      defaultValue: "not validated",
     },
     createdAt: {
       type: DataTypes.DATE, 
@@ -37,15 +37,6 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Request',
     tableName: 'requests',
   });
-
-  Request.belongsTo(
-    sequelize.models.Dorayaki, 
-    {
-      foreignKey: 'fk_request_dorayaki',
-      targetKey: 'id',
-      through: 'id_dorayaki',
-    }
-  );
 
   return Request;
 };

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class LogRequest extends Model {
+  class LogAdminRequest extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,10 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  LogRequest.init({
+  LogAdminRequest.init({
     id_admin: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    id_request: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -24,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'LogRequest',
-    tableName: 'log_requests',
+    modelName: 'LogAdminRequest',
+    tableName: 'log_admin_requests',
   });
-  return LogRequest;
+  return LogAdminRequest;
 };
