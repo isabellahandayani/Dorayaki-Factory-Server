@@ -86,7 +86,7 @@ exports.createRequest = async (req, res) => {
 
       gmailTransporter.sendMail(mailOptions, (err, info) => {
         if (err) {
-          logger.log('error', `Failed sending e-mail to ${admin.email}`)
+          logger.log('error', `Failed sending e-mail to ${admin.email}: ${err}`)
           throw err
         } else {
           logger.log('info', `Successfully sent e-mail to ${admin.email}: ${info.response}`)
