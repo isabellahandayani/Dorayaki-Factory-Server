@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const UserServices = require('../services/UserServices');
 JWT_SECRET = require('../../utils/Constant');
 
 /**
@@ -16,14 +17,30 @@ const verifyToken = (req, res, next) => {
         });
     }
 
-    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    jwt.verify(token, JWT_SECRET, async (err, decoded) => {
         if (err) {
             return res.status(401).json({
                 message: 'Invalid token.'
             });
         }
-        req.user = decoded;
-        next();
+        
+        if (decoded.user) {
+            admin = await UserServices.findAdminById(decoded.user.id);
+
+            if (admin.email && admin.email === decoded.user.email) {
+                req.user = decoded.user;
+                next();
+            } else {
+                return res.status(401).json({
+                    message: 'Invalid token.'
+                });
+            }
+
+        } else {
+            return res.status(401).json({
+                message: 'Invalid token.'
+            });
+        }
     });
 }
 
