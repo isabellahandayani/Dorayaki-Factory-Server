@@ -1,12 +1,13 @@
 const JWT_SECRET = require('../../utils/Constant');
 const jwt = require('jsonwebtoken');
 const UserServices = require('../services/UserServices');
+const sha256 = require('crypto-js/sha256');
 
 module.exports = {
   /**
-   * 
-   * @param {Request} req 
-   * @param {Response} res 
+   *
+   * @param {Request} req
+   * @param {Response} res
    */
   async createUser(req, res) {
     const { username, email, password } = req.body;
@@ -17,9 +18,11 @@ module.exports = {
       });
     }
 
+    const encrpytedPassword = sha256(password).toString();
+
     const [admin, created] = await UserServices.findOrCreateAdminByEmail(
       email,
-      req.body,
+      { ...req.body, password: encrpytedPassword },
       true
     );
 
@@ -42,9 +45,9 @@ module.exports = {
     }
   },
   /**
-   * 
-   * @param {Request} req 
-   * @param {Response} res 
+   *
+   * @param {Request} req
+   * @param {Response} res
    */
   async findUser(req, res) {
     const { email, password } = req.body;
@@ -55,7 +58,13 @@ module.exports = {
       });
     }
 
-    const admin = await UserServices.findOrCreateAdminByEmail(email, req.body, false);
+    const encrpytedPassword = sha256(password).toString();
+
+    const admin = await UserServices.findOrCreateAdminByEmail(
+      email,
+      { ...req.body, password: encrpytedPassword },
+      false
+    );
 
     if (admin) {
       const token = jwt.sign(
@@ -74,5 +83,5 @@ module.exports = {
         message: 'Admin not found',
       });
     }
-  }
+  },
 };
