@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   };
-  Request.init({
+  LogRequest.init({
     ip: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamp: {
       type: DataTypes.DATE, 
       allowNull: false,
-      defaultValue: Sequelize.NOW
+      defaultValue: DataTypes.NOW
     }
   }, {
     sequelize,
