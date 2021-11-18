@@ -16,7 +16,7 @@ exports.getAllRequest = async () => {
   }
 };
 
-exports.getAllLogRequest = async (id) => {
+exports.getAllLogAdminRequest = async (id) => {
   /*
    *  Read Request List from DB
    */

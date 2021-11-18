@@ -19,7 +19,7 @@ exports.index = async (_, res) => {
   }
 };
 
-exports.logRequest = async (req, res) => {
+exports.logAdminRequest = async (req, res) => {
   /*
    *  Get all log request of an admin
    */
@@ -27,9 +27,9 @@ exports.logRequest = async (req, res) => {
   const id_admin = req.user.id;
 
   try {
-    const logRequestData = await RequestServices.getAllLogRequest(id_admin);
+    const logAdminRequestData = await RequestServices.getAllLogAdminRequest(id_admin);
 
-    return res.status(200).json({ data: logRequestData });
+    return res.status(200).json({ data: logAdminRequestData });
   } catch (e) {
     return res.status(400).json({ message: e.message });
   }
