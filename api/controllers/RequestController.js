@@ -41,12 +41,12 @@ exports.validateRequest = async (req, res) => {
    */
 
   const id_admin = req.user.id;
-  const { isValid } = req.body;
+  const { is_valid } = req.body;
   const id_request = req.params.id
 
   try {
-    await RequestServices.validateRequest(id_request, isValid);
-    if (isValid) {
+    await RequestServices.validateRequest(id_request, is_valid);
+    if (is_valid) {
       const newLogRequest = {
         id_admin,
         id_request,
