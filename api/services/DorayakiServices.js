@@ -11,7 +11,11 @@ exports.getAllDorayaki = async () => {
   /*
    *  Read Dorayaki List from DB
    */
-  const dorayaki = await Dorayaki.findAll({})
+  const dorayaki = await Dorayaki.findAll({
+    attributes: {
+      exclude: ['createdAt', 'updatedAt']
+    }
+  })
     .then((data) => {
       return data;
     })
