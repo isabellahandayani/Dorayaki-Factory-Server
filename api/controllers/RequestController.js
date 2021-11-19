@@ -27,10 +27,11 @@ exports.logAdminRequest = async (req, res) => {
   const id_admin = req.user.id;
 
   try {
-    const logAdminRequestData = await RequestServices.getAllLogAdminRequest(id_admin);
+    const logAdminRequestData = await RequestServices.getAllAdminRequest(id_admin);
 
     return res.status(200).json({ data: logAdminRequestData });
   } catch (e) {
+    console.log("KOCAK GAMING", e.message);
     return res.status(400).json({ message: e.message });
   }
 };
