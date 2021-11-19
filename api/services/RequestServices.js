@@ -2,7 +2,9 @@ var exports = (module.exports = {});
 const {
   Request,
   LogAdminRequest,
+  sequelize,
 } = require("../../db/models");
+const { QueryTypes } = require("sequelize");
 
 exports.getAllRequest = async () => {
   /*
@@ -16,14 +18,23 @@ exports.getAllRequest = async () => {
   }
 };
 
-exports.getAllLogAdminRequest = async (id) => {
+exports.getAllAdminRequest = async (id) => {
   /*
    *  Read Request List from DB
    */
   try {
-    const data = await LogAdminRequest.findAll({
-      where: { id_admin: id },
-    });
+    const data = await sequelize.query(`
+        SELECT r.id, r.id_dorayaki, r.stok_added, r.status 
+        FROM requests r 
+        INNER JOIN log_admin_requests ar 
+          ON r.id = ar.id_request 
+        WHERE ar.id_admin = ${id}
+      `,
+      {
+        type: QueryTypes.SELECT
+      }
+    )
+
     return data;
   } catch (e) {
     throw Error(e);
