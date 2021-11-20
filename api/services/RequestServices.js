@@ -46,12 +46,14 @@ exports.makeRequest = async (data) => {
    *  Make new Request according to the dorayaki and stock
    */
 
-  const { id_dorayaki, stok_added } = data;
+  const { id_dorayaki, stok_added, status, created_at } = data;
 
   try {
     const request = await Request.create({
       id_dorayaki: id_dorayaki,
       stok_added: stok_added,
+      status: status,
+      created_at: created_at
     });
 
     return request;
